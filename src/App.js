@@ -1,31 +1,34 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import Homepage from '~/pages/Home';
-import ContactPage from '~/pages/Contact';
-import NewPage from '~/pages/New';
-
+import { Fragment } from 'react';
+// Fragment chỉ để chứa không tạo ra div thật
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { publicRoutes } from '~/routes';
+import { DefaultLayout } from '~/component/Layout';
 function App() {
     return (
-        <div>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/contact">contact</Link>
-                    </li>
-                    <li>
-                        <Link to="/new">new</Link>
-                    </li>
-                </ul>
-            </nav>
+        <Router>
             <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/new" element={<NewPage />} />
+                {publicRoutes.map((route, index) => {
+                    let Layout = DefaultLayout;
+                    if (route.layout) {
+                        Layout = route.layout;
+                    } else if (route.layout === null) {
+                        Layout = Fragment;
+                    }
+                    const Page = route.component;
+                    return (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={
+                                <Layout>
+                                    <Page />
+                                </Layout>
+                            }
+                        />
+                    );
+                })}
             </Routes>
-        </div>
+        </Router>
     );
 }
-
 export default App;

@@ -1,0 +1,31 @@
+@import 'normalize.css';
+@font-face {
+    font-family: 'ProximaNova';
+    src: url(//lf16-tiktok-common.ttwstatic.com/obj/tiktok-web-common-sg/falcon/tiktok_fonts/Proxima-Nova-Bold.woff2)
+        format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root {
+    --primary: #fe2c55;
+    --default-layout-header-height: 60px;
+    --default-layout-content-width: 1150px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
